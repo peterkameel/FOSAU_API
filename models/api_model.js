@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 //mongoose Schema
 const SemesterSchema = mongoose.Schema({
+    id: Number,
     userid: String,
     name: String,
     note: String
@@ -11,6 +12,7 @@ const SemesterSchema = mongoose.Schema({
     });
 
 const CourseSchema = mongoose.Schema({
+    id: Number,
     userid: String,
     semesterid: String,
     name: String,
@@ -26,7 +28,7 @@ const Semester = mongoose.model('semester', SemesterSchema);
 const Course = mongoose.model('course', CourseSchema);
 
 //restore function
-exports.restoreSemesters = (req, res) => {
+exports.restore = (req, res) => {
     var cour;
     restoreCourses(req, (resultt) => {
         cour = resultt;

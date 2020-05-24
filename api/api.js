@@ -5,7 +5,7 @@ const router  = express.Router();
 //fun for restore data
 router.post('/restore', (req, res) => {
     if (Object.keys(req.body).length !== 0) {
-        api.restoreSemesters(req, res);
+        api.restore(req, res);
     } else {
         res.json({
             error: true,
