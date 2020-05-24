@@ -16,8 +16,10 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    if (Object.keys(req.body).length !== 0) {
-        user.login(req.body, res);
+    var email = req.body.email;
+    var password = req.body.password;
+    if (email !== 0 && password !== 0) {
+        user.login(email, password, res);
     } else {
         res.json({
             error: true,

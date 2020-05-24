@@ -37,17 +37,17 @@ exports.signup = (body, res) => {
 };
 
 //Login function
-exports.login = (body, result1) => {
-    User.find({ password: body.password }).exec().then(res => {
+exports.login = (email,password, result1) => {
+    User.find({ password:password }).exec().then(res => {
         if (res.length > 0)
-            User.find({ email: body.email, password: body.password })
+            User.find({ email: email, password: password })
                 .exec()
                 .then(result => {
                     if (result.length > 0) {
                         result1.json({
                             error: false,
                             massage: 'Login Successfull',
-                            user: result
+                            user: result[0]
                         });
                     } else result1.json({
                         error: true,
