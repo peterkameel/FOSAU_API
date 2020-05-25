@@ -64,6 +64,7 @@ const restoreCourses = (req, callback) => {
 const updateSemester = (item) => {
     const query = { _id: item._id, userid: item.userid };
     Semester.findOneAndUpdate(query, {
+        id: item.id,
         name: item.name,
         note: item.note
     }).exec().then(ress => {
@@ -72,6 +73,7 @@ const updateSemester = (item) => {
 };
 const interSemester = (item) => {
     const semes = new Semester({
+        id: item.id,
         userid: item.userid,
         name: item.name,
         note: item.note
@@ -98,6 +100,7 @@ exports.syncs = (item) => {
 const updateCourse = (item) => {
     const query = { _id: item._id, semesterid: item.semesterid, userid: item.userid };
     Course.findOneAndUpdate(query, {
+        id: item.id,
         userid: item.userid,
         semesterid: item.semesterid,
         name: item.name,
@@ -109,6 +112,7 @@ const updateCourse = (item) => {
 };
 const interCourse = (item) => {
     const cours = new Course({
+        id: item.id,
         userid: item.userid,
         semesterid: item.semesterid,
         name: item.name,
