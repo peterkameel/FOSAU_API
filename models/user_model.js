@@ -75,15 +75,15 @@ exports.forgetpassword = (body, result) => {
 
 const sendMail = (body, result) => {
     var transporter = nodemailer.createTransport({
-        service: 'outlook',
+        service: 'yahoo',
         auth: {
-            user: 'pkameel@outlook.com',
-            pass: '@peter2020'
+            user: 'peterkameel95@yahoo.com',
+            pass: '0parkar0'
         }
     });
 
     var mailOptions = {
-        from:'pkameel@outlook.com' ,
+        from:'peterkameel95@yahoo.com' ,
         to: body.email,
         subject: 'Restore Password',
         text: 'Use this password to login: ${body.password}'
