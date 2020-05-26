@@ -78,8 +78,7 @@ const sendMail = (body, result) => {
         service: 'yahoo',
         auth: {
             user: 'peterkameel95@yahoo.com',
-            pass: '0parkar0'
-        }
+            pass: 'alxrannqyyrganui'}
     });
 
     var mailOptions = {
