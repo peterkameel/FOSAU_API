@@ -75,7 +75,7 @@ exports.forgetpassword = (body, result) => {
 
 const sendMail = (body, result) => {
     var transporter = nodemailer.createTransport({
-        service: 'outlook.com',
+        service: 'outlook',
         auth: {
             user: 'pkameel@outlook.com',
             pass: '@peter2020'

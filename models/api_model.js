@@ -28,11 +28,8 @@ const Semester = mongoose.model('semester', SemesterSchema);
 const Course = mongoose.model('course', CourseSchema);
 
 //restore function
-exports.restore = (req, res) => {
-    var cour;
-    restoreCourses(req, (resultt) => {
-        cour = resultt;
-    });
+exports.restore = async (req, res) => {
+    let courses = await restoreCourses(req);
     Semester.find({ userid: req.body.userid })
         .exec()
         .then(result => {
@@ -41,7 +38,7 @@ exports.restore = (req, res) => {
                     error: false,
                     massage: 'Backup Restored',
                     semester: result,
-                    course: cour
+                    course: courses
                 });
             }
             else res.json({
@@ -50,19 +47,19 @@ exports.restore = (req, res) => {
             });
         });
 };
-const restoreCourses = (req, callback) => {
-    Course.find({ userid: req.body.userid })
+const restoreCourses = (req) => {
+    return Course.find({ userid: req.body.userid })
         .exec()
         .then(result => {
-            if (result.length > 0) return callback(result);
-            else return callback(null);
+            if (result.length > 0) return result;
+            else return null;
         });
 };
 
 
 //sync semesters
 const updateSemester = (item) => {
-    const query = { _id: item._id, userid: item.userid };
+    const query = { id: item.id, userid: item.userid };
     Semester.findOneAndUpdate(query, {
         id: item.id,
         name: item.name,
@@ -98,7 +95,7 @@ exports.syncs = (item) => {
 
 //sync courses
 const updateCourse = (item) => {
-    const query = { _id: item._id, semesterid: item.semesterid, userid: item.userid };
+    const query = { id: item.id, semesterid: item.semesterid, userid: item.userid };
     Course.findOneAndUpdate(query, {
         id: item.id,
         userid: item.userid,
