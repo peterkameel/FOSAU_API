@@ -39,5 +39,27 @@ router.post('/forget', (req, res) => {
     };
 });
 
+router.post('/username',(req,res) => {
+    if (Object.keys(req.body).length !== 0) {
+        user.username(req.body,res);
+    }else {
+        res.json({
+            error: true,
+            massage: 'Error Try Again'
+        });
+    };
+});
+
+router.post('/userpassword',(req,res) => {
+    if (Object.keys(req.body).length !== 0) {
+        user.userpass(req.body,res);
+    }else {
+        res.json({
+            error: true,
+            massage: 'Error Try Again'
+        });
+    };
+});
+
 
 module.exports = router;

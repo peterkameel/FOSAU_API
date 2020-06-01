@@ -61,6 +61,7 @@ exports.login = (email,password, result1) => {
     });
 };
 
+//forget password functions
 exports.forgetpassword = (body, result) => {
     User.find({ email: body.email })
         .exec().then(res => {
@@ -75,14 +76,14 @@ exports.forgetpassword = (body, result) => {
 
 const sendMail = (body, result) => {
     var transporter = nodemailer.createTransport({
-        service: 'yahoo',
+        service: 'gmail',
         auth: {
-            user: 'peterkameel95@yahoo.com',
-            pass: 'alxrannqyyrganui'}
+            user: 'kameel.sd@gmail.com',
+            pass: 'sdfagh135'}
     });
 
     var mailOptions = {
-        from:'peterkameel95@yahoo.com' ,
+        from:'kameel.sd@gmail.com' ,
         to: body.email,
         subject: 'Restore Password',
         text: 'Use this password to login: ${body.password}'
@@ -96,3 +97,31 @@ const sendMail = (body, result) => {
         }
     });
 };
+
+//update user name fun
+exports.username = (item, result) => {
+    const query = { email: item.email };
+    User.findOneAndUpdate(query,{
+       username: item.username
+    }).exec().then(ress => {
+        result.json({
+            error: false,
+            massage: 'Update successfull',
+            user: {username:item.username}
+        });
+    }).catch(error => { console.log(error) });
+}
+
+//update user name fun
+exports.userpass = (item, result) => {
+    const query = { email: item.email , password:item.password};
+    User.findOneAndUpdate(query,{
+       password: item.newpassword
+    }).exec().then(ress => {
+        result.json({
+            error: false,
+            massage: 'Update successfull',
+            user: {password:item.newpassword}
+        });
+    }).catch(error => { console.log(error) });
+}
