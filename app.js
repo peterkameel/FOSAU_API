@@ -5,6 +5,7 @@ const body = require('body-parser');
 const user = require('./api/user');
 const api = require('./api/api');
 
+
 mongoose.connect("mongodb+srv://peterkameel:@peter2020@fosau-jyv6o.mongodb.net/fosau?retryWrites=true&w=majority",{
     useUnifiedTopology: true,
     useNewUrlParser: true
@@ -22,5 +23,6 @@ app.use('/api', api);
 app.use('/',(req,res)=>{
     res.json({massage: 'Hello peter app is perfict'});
 });
+
 
 module.exports = app;

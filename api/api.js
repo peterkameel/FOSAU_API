@@ -50,5 +50,4 @@ router.post('/syncc', (req, res) => {
     };
 });
 
-
 module.exports = router;
