@@ -66,8 +66,8 @@ exports.forgetpassword = (body, result) => {
     User.find({ email: body.email })
         .exec().then(res => {
             if (res.length > 0) {
-                const email = body.email;
-                const pass  = body.password;
+                const email = res[0].email;
+                const pass  = res[0].password;
                 sendMail(email, pass, result);
             } else result.json({
                 error: true,
