@@ -66,7 +66,9 @@ exports.forgetpassword = (body, result) => {
     User.find({ email: body.email })
         .exec().then(res => {
             if (res.length > 0) {
-                sendMail(res, result);
+                const email = body.email;
+                const pass  = body.password;
+                sendMail(email, pass, result);
             } else result.json({
                 error: true,
                 massage: 'Check Your Email'
@@ -74,26 +76,26 @@ exports.forgetpassword = (body, result) => {
         });
 };
 
-const sendMail = (body, result) => {
+const sendMail = (email, pass, result) => {
     var transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: 'yahoo',
         auth: {
-            user: 'kameel.sd@gmail.com',
-            pass: 'sdfagh135'}
+            user: 'peterkameel95@yahoo.com',
+            pass: 'exlvxipdqiaqzopk'}
     });
 
     var mailOptions = {
-        from:'kameel.sd@gmail.com' ,
-        to: body.email,
+        from:'peterkameel95@yahoo.com' ,
+        to: email,
         subject: 'Restore Password',
-        text: 'Use this password to login: ${body.password}'
+        text: 'Use this password to login: ' + pass
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-            result.json({err: error});
+            result.json({error: error});
         } else {
-            result.json({err: false,massage: info.massage});
+            result.json({error: false, massage: 'Email is send'});
         }
     });
 };

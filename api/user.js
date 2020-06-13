@@ -39,6 +39,7 @@ router.post('/forget', (req, res) => {
     };
 });
 
+
 router.post('/username',(req,res) => {
     if (Object.keys(req.body).length !== 0) {
         user.username(req.body,res);
